@@ -81,7 +81,16 @@ Unity MonoBehaviours:
 
 ## Ads Integration
 
-Advertisements are accessed through an abstraction layer:
+Advertisements are accessed through an abstraction layer of IAdsService
 
-```csharp
-IAdsService
+This allows:
+- Mock implementation in the Editor
+- Platform-specific implementations (e.g. Yandex Games, Unity Ads)
+
+## Project Goals
+
+- Demonstrate clean Unity project architecture
+- Show practical use of Zenject, UniRx, and DOTween
+- Provide an example of SDK abstraction and WebGL deployment
+- Deliver a complete, finished game rather than a prototype
+
