@@ -1,5 +1,6 @@
 using UniRx;
 public interface IPlayerControlService
 {
-    IReadOnlyReactiveProperty<bool> isInputEnabled { get; }
+    IReadOnlyReactiveProperty<bool> IsInputEnabled { get; }
+    public void SetInputEnabled(bool isInputEnabled);
 }

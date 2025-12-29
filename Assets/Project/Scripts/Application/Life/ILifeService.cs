@@ -1,5 +1,10 @@
 using UniRx;
 public interface ILifeService
 {
-    ReadOnlyReactiveProperty<int> CurrentLife { get; }
+    IReadOnlyReactiveProperty<int> CurrentLife { get; }
+    IReadOnlyReactiveProperty<bool> Revived { get; }
+    void Damage(int amount = 1);
+    void Heal(int amount = 1);
+    void Revive();
+    void Reset();
 }
