@@ -10,6 +10,7 @@ public class ServiceInstaller : ScriptableObjectInstaller<ServiceInstaller>
         Container.Bind<IGameStateService>().To<GameStateService>().AsSingle().NonLazy();
         Container.Bind<ILifeService>().To<LifeService>().AsSingle().NonLazy();
         Container.Bind<IScoreService>().To<ScoreService>().AsSingle().NonLazy();
+        Container.Bind<ICarSelectionService>().To<CarSelectionService>().AsSingle().NonLazy();
         Container.Bind<IPlayerControlService>().To<PlayerControlService>().AsSingle().NonLazy();
         Container.Bind<ISaveService>().To<PlayerPrefsSaveService>().AsSingle().NonLazy();
         Container.Bind<IAdsService>().To<MockAdsService>().AsSingle().NonLazy();
