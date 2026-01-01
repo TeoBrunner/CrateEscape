@@ -18,12 +18,12 @@ public class LifeService : ILifeService
 
     public void Damage(int amount = 1)
     {
-        currentLife.Value = Mathf.Min(0, currentLife.Value - amount);
+        currentLife.Value = Mathf.Max(0, currentLife.Value - amount);
     }
 
     public void Heal(int amount = 1)
     {
-        currentLife.Value = Mathf.Max(currentLife.Value + amount, maxLives);
+        currentLife.Value = Mathf.Min(currentLife.Value + amount, maxLives);
     }
 
     public void Reset()
