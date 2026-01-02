@@ -3,25 +3,31 @@ using UniRx;
 
 public class GameFlowService : IGameFlowService, IDisposable
 {
+    private readonly ISaveService saveService;
     private readonly IGameStateService gameStateService;
     private readonly ILifeService lifeService;
+    private readonly ICurrencyService currencyService;
     private readonly IScoreService scoreService;
     private readonly ICarSelectionService carSelectionService;
-    private readonly ISaveService saveService;
+    private readonly IAdsService adsService;
 
     private readonly CompositeDisposable disposables = new();
     public GameFlowService(
+        ISaveService saveService,
         IGameStateService gameStateService, 
         ILifeService lifeService,
+        ICurrencyService currencyService,
         IScoreService scoreService,
-        ISaveService saveService,
-        ICarSelectionService carSelectionService)
+        ICarSelectionService carSelectionService,
+        IAdsService adsService)
     {
+        this.saveService = saveService;
         this.gameStateService = gameStateService;
         this.lifeService = lifeService;
+        this.currencyService = currencyService;
         this.scoreService = scoreService;
-        this.saveService = saveService;
         this.carSelectionService = carSelectionService;
+        this.adsService = adsService;
 
         SubscribeToLife();
     }
@@ -68,6 +74,34 @@ public class GameFlowService : IGameFlowService, IDisposable
             return;
 
         gameStateService.SetCurrentState(GameState.Reviving);
+        OnReviveSuccess();
+    }
+    public void TryReviveWithCurrency(int cost)
+    {
+        if (gameStateService.CurrentState.Value != GameState.GameOver)
+            return;
+
+        if (lifeService.Revived.Value == true)
+            return;
+
+        if (currencyService.TrySpend(cost))
+        {
+            gameStateService.SetCurrentState(GameState.Reviving);
+            OnReviveSuccess();
+        }
+    }
+    public void TryReviveWithAds()
+    {
+        if (gameStateService.CurrentState.Value != GameState.GameOver)
+            return;
+
+        if (lifeService.Revived.Value == true)
+            return;
+
+        if (adsService.IsRewardedAvailable.Value)
+        {
+            adsService.ShowRewarded(OnReviveSuccess, OnReviveFailed);
+        }
     }
     public void OnReviveSuccess()
     {
