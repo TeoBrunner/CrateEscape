@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47ce43aaf433fde42a2f3ed02e78bfdb, type: 3}
-  m_Name: ServiceInstaller
-  m_EditorClassIdentifier: Assembly-CSharp::ServiceInstaller
-  AudioPrefab: {fileID: 1855196868744574275, guid: 5a13272184a0dbb4d94fa461c846669a, type: 3}
+  m_Script: {fileID: 11500000, guid: bc736ff79713d4148859e67612becab2, type: 3}
+  m_Name: AudioDatabase
+  m_EditorClassIdentifier: Assembly-CSharp::AudioDatabase
+  clips: []

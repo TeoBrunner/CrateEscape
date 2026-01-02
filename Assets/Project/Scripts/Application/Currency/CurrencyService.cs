@@ -2,7 +2,7 @@ using UniRx;
 
 public class CurrencyService : ICurrencyService
 {
-    private readonly ReactiveProperty<int> totalCurrency;
+    private readonly ReactiveProperty<int> totalCurrency = new();
     public IReadOnlyReactiveProperty<int> TotalCurrency => totalCurrency;
 
     private readonly ISaveService saveService;

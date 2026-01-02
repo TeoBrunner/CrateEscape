@@ -4,14 +4,14 @@ using Zenject;
 
 public class InputService : IInputService, IDisposable
 {
-    private readonly ReactiveProperty<bool> turnLeft;
+    private readonly ReactiveProperty<bool> turnLeft = new();
     public IReadOnlyReactiveProperty<bool> TurnLeft => turnLeft;
 
-    private readonly ReactiveProperty<bool> turnRight;
+    private readonly ReactiveProperty<bool> turnRight = new();
     public IReadOnlyReactiveProperty<bool> TurnRight => turnRight;
 
     private IPlayerControlService playerControlService;
-    private CompositeDisposable disposable;
+    private CompositeDisposable disposable = new();
     [Inject]
     public InputService(IPlayerControlService playerControlService)
     {
