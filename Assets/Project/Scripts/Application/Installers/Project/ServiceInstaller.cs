@@ -15,6 +15,8 @@ public class ServiceInstaller : ScriptableObjectInstaller<ServiceInstaller>
         Container.Bind<IScoreService>().To<ScoreService>().AsSingle().NonLazy();
         Container.Bind<ICarSelectionService>().To<CarSelectionService>().AsSingle().NonLazy();
         Container.Bind<IPlayerControlService>().To<PlayerControlService>().AsSingle().NonLazy();
+        Container.Bind<IInputService>().To<InputService>().AsSingle().NonLazy();
+        Container.Bind<IAudioService>().To<AudioService>().AsSingle().NonLazy();
         
         Container.Bind<IAdsService>().To<MockAdsService>().AsSingle().NonLazy();
 
