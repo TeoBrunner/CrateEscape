@@ -6,6 +6,7 @@ public class GameFlowService : IGameFlowService, IDisposable
     private readonly IGameStateService gameStateService;
     private readonly ILifeService lifeService;
     private readonly IScoreService scoreService;
+    private readonly ICarSelectionService carSelectionService;
     private readonly ISaveService saveService;
 
     private readonly CompositeDisposable disposables = new();
@@ -13,12 +14,14 @@ public class GameFlowService : IGameFlowService, IDisposable
         IGameStateService gameStateService, 
         ILifeService lifeService,
         IScoreService scoreService,
-        ISaveService saveService)
+        ISaveService saveService,
+        ICarSelectionService carSelectionService)
     {
         this.gameStateService = gameStateService;
         this.lifeService = lifeService;
         this.scoreService = scoreService;
         this.saveService = saveService;
+        this.carSelectionService = carSelectionService;
 
         SubscribeToLife();
     }
@@ -32,7 +35,7 @@ public class GameFlowService : IGameFlowService, IDisposable
 
     public void StartGame() 
     {
-        lifeService.Reset();
+        lifeService.SetMaxLives(carSelectionService.CurrentCar.Value.MaxLives);
         scoreService.Reset();
         gameStateService.SetCurrentState(GameState.Playing);
     }

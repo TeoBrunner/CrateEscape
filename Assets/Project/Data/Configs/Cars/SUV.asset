@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1794b7dd1fe50d4c9e999c4d074eef5, type: 3}
   m_Name: SUV
   m_EditorClassIdentifier: Assembly-CSharp::CarConfig
-  carId: 
-  carName: 
-  maxLives: 0
-  speed: 0
-  turnSpeed: 0
+  carId: SUV
+  carName: SUV
+  maxLives: 3
+  speed: 1
+  turnSpeed: 1

@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 152550246c8e0a343a11ce7cdfd0d45a, type: 3}
   m_Name: CarDatabase
   m_EditorClassIdentifier: Assembly-CSharp::CarDatabase
-  carConfigs: []
+  carConfigs:
+  - {fileID: 11400000, guid: cc29170f6d5697247b8037b799bcb601, type: 2}

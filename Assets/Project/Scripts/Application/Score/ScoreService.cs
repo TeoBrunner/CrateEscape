@@ -2,10 +2,10 @@ using UniRx;
 
 public class ScoreService : IScoreService
 {
-    private readonly ReactiveProperty<int> currentScore;
+    private readonly ReactiveProperty<int> currentScore = new();
     public IReadOnlyReactiveProperty<int> CurrentScore => currentScore;
 
-    private readonly ReactiveProperty<int> topScore;
+    private readonly ReactiveProperty<int> topScore = new();
     public IReadOnlyReactiveProperty<int> TopScore => topScore;
 
     private ISaveService saveService;

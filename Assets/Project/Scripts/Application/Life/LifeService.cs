@@ -3,17 +3,18 @@ using UnityEngine;
 
 public class LifeService : ILifeService
 {
-    private readonly ReactiveProperty<int> currentLife;
+    private readonly ReactiveProperty<int> currentLife = new();
     public IReadOnlyReactiveProperty<int> CurrentLife => currentLife;
 
-    private readonly ReactiveProperty<bool> revived;
+    private readonly ReactiveProperty<bool> revived = new();
     public IReadOnlyReactiveProperty<bool> Revived => revived;
 
-    private readonly int maxLives;
+    private int maxLives;
 
-    public LifeService(int maxLives)
+    public void SetMaxLives(int maxLives)
     {
         this.maxLives = maxLives;
+        Reset();
     }
 
     public void Damage(int amount = 1)
