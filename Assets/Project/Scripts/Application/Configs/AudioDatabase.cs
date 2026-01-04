@@ -17,10 +17,9 @@ public class AudioDatabase : ScriptableObject
         }
 
         AudioClip clip = clips.FirstOrDefault(a => a.name == id);
-        if (clips == null)
+        if (clip == null)
         {
             Debug.Log("Audio database does not contain" + id + "!");
-            return clips.First();
         }
 
         return clip;

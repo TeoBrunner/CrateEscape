@@ -4,7 +4,7 @@ using Zenject;
 [CreateAssetMenu(fileName = "ServiceInstaller", menuName = "Installers/ServiceInstaller")]
 public class ServiceInstaller : ScriptableObjectInstaller<ServiceInstaller>
 {
-    [SerializeField] private AudioView AudioPrefab;
+    [SerializeField] private AudioView AudioViewPrefab;
     public override void InstallBindings()
     {
         Container.Bind<ISaveService>().To<PlayerPrefsSaveService>().AsSingle().NonLazy();
@@ -19,8 +19,8 @@ public class ServiceInstaller : ScriptableObjectInstaller<ServiceInstaller>
 
         Container.Bind<IAdsService>().To<MockAdsService>().AsSingle().NonLazy();
 
-        Container.Bind<AudioView>().FromComponentInNewPrefab(AudioPrefab).AsSingle().NonLazy();
-        Container.Bind<IAudioService>().To<AudioService>().AsSingle().WithArguments(AudioPrefab.MusicSource,AudioPrefab.SFXSource).NonLazy();
+        Container.Bind<AudioView>().FromComponentInNewPrefab(AudioViewPrefab).AsSingle().NonLazy();
+        Container.Bind<IAudioService>().To<AudioService>().AsSingle().NonLazy();
         
 
         Container.Bind<IGameFlowService>().To<GameFlowService>().AsSingle().NonLazy();

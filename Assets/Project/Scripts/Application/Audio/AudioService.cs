@@ -5,11 +5,11 @@ public class AudioService : IAudioService
     private readonly AudioDatabase database;
     private readonly AudioSource musicSource;
     private readonly AudioSource sFXSource;
-    public AudioService(AudioDatabase database, AudioSource musicSource, AudioSource sFXSource)
+    public AudioService(AudioDatabase database, AudioView AudioViewPrefab)
     {
         this.database = database;
-        this.musicSource = musicSource;
-        this.sFXSource = sFXSource;
+        this.musicSource = AudioViewPrefab.MusicSource;
+        this.sFXSource = AudioViewPrefab.SFXSource;
     }
     public void PlayMusic(string id)
     {
