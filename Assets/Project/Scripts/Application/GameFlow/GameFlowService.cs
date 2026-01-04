@@ -9,6 +9,7 @@ public class GameFlowService : IGameFlowService, IDisposable
     private readonly ICurrencyService currencyService;
     private readonly IScoreService scoreService;
     private readonly ICarSelectionService carSelectionService;
+    private readonly ICrateSpawnService crateSpawnService;
     private readonly IAdsService adsService;
 
     private readonly CompositeDisposable disposables = new();
@@ -19,6 +20,7 @@ public class GameFlowService : IGameFlowService, IDisposable
         ICurrencyService currencyService,
         IScoreService scoreService,
         ICarSelectionService carSelectionService,
+        ICrateSpawnService crateSpawnService,
         IAdsService adsService)
     {
         this.saveService = saveService;
@@ -27,6 +29,7 @@ public class GameFlowService : IGameFlowService, IDisposable
         this.currencyService = currencyService;
         this.scoreService = scoreService;
         this.carSelectionService = carSelectionService;
+        this.crateSpawnService = crateSpawnService;
         this.adsService = adsService;
 
         SubscribeToLife();
@@ -42,6 +45,9 @@ public class GameFlowService : IGameFlowService, IDisposable
     public void StartGame() 
     {
         lifeService.SetMaxLives(carSelectionService.CurrentCar.Value.MaxLives);
+        crateSpawnService.RegisterDelays(
+            carSelectionService.CurrentCar.Value.CrateSpawnDelay, 
+            carSelectionService.CurrentCar.Value.CrateActivationDelay);
         scoreService.Reset();
         gameStateService.SetCurrentState(GameState.Playing);
     }

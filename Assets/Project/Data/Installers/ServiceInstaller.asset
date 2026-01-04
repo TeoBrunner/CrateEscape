@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47ce43aaf433fde42a2f3ed02e78bfdb, type: 3}
   m_Name: ServiceInstaller
   m_EditorClassIdentifier: Assembly-CSharp::ServiceInstaller
-  AudioPrefab: {fileID: 1855196868744574275, guid: 5a13272184a0dbb4d94fa461c846669a, type: 3}
+  audioViewPrefab: {fileID: 1855196868744574275, guid: 5a13272184a0dbb4d94fa461c846669a, type: 3}
+  crateViewPrefab: {fileID: 3971261702054182192, guid: f736dfbd1cbb5274d8714ce979fe0b51, type: 3}
