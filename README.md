@@ -4,6 +4,8 @@ Crate Escape is a small arcade score-attack game made in Unity.
 The project is designed as a portfolio piece with a strong focus on clean architecture,
 decoupled systems, and real-world platform integration.
 
+<img width="1445" height="806" alt="Снимок экрана 2026-01-04 195234" src="https://github.com/user-attachments/assets/1ef1dd62-da36-4ed3-b650-41dadc14dd1e" />
+
 ## Game Concept (Mini GDD)
 
 **Genre:** Arcade / Score Attack
