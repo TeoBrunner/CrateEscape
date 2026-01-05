@@ -21,8 +21,6 @@ public class MainMenuView : MonoBehaviour
     {
         playButton.OnClickAsObservable().Subscribe(_=>gameFlowService.StartGame()).AddTo(this);
         gameStateService.CurrentState.Subscribe(OnStateChanged).AddTo(this);
-
-        print(gameStateService.CurrentState.Value);
     }
     private void OnStateChanged(GameState state)
     {
