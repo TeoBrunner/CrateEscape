@@ -23,7 +23,7 @@ public class PlayerPrefsSaveService : ISaveService
     {
         PlayerPrefs.SetInt(TOP_SCORE_KEY, topScore);
     }
-    public string LoadCurrentCar()
+    public string LoadCurrentCarId()
     {
         return PlayerPrefs.GetString(CURRENT_CAR_KEY);
     }

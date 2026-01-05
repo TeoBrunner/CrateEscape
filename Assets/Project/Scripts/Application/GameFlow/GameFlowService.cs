@@ -38,6 +38,7 @@ public class GameFlowService : IGameFlowService, IDisposable
     {
         lifeService.CurrentLife
             .Where(lives => lives <=0)
+            .Where(_ => gameStateService.CurrentState.Value == GameState.Playing)
             .Subscribe( _ => OnPlayerDied())
             .AddTo(disposables);
     }

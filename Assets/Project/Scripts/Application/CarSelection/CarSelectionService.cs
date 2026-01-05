@@ -2,7 +2,7 @@ using UniRx;
 
 public class CarSelectionService : ICarSelectionService
 {
-    private readonly ReactiveProperty<CarConfig> currentCar;
+    private readonly ReactiveProperty<CarConfig> currentCar = new();
     public IReadOnlyReactiveProperty<CarConfig> CurrentCar => currentCar;
 
     private CarDatabase database;
