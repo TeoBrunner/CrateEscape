@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarConfig
   carId: SUV
   carName: SUV
+  carPrefab: {fileID: 8272298487813027769, guid: 50f57020df279b24a8539327e6adc142, type: 3}
   maxLives: 3
   speed: 1
-  turnSpeed: 1
+  turnSpeed: 100
+  crateSpawnDelay: 0.5
+  crateActivationDelay: 1

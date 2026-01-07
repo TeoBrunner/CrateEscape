@@ -10,6 +10,8 @@ public class GameFlowService : IGameFlowService, IDisposable
     private readonly IScoreService scoreService;
     private readonly ICarSelectionService carSelectionService;
     private readonly ICrateSpawnService crateSpawnService;
+    private readonly IPlayerSpawnService playerSpawnService;
+    private readonly IPlayerControlService playerControlService;
     private readonly IAdsService adsService;
 
     private readonly CompositeDisposable disposables = new();
@@ -21,6 +23,8 @@ public class GameFlowService : IGameFlowService, IDisposable
         IScoreService scoreService,
         ICarSelectionService carSelectionService,
         ICrateSpawnService crateSpawnService,
+        IPlayerSpawnService playerSpawnService,
+        IPlayerControlService playerControlService,
         IAdsService adsService)
     {
         this.saveService = saveService;
@@ -30,6 +34,8 @@ public class GameFlowService : IGameFlowService, IDisposable
         this.scoreService = scoreService;
         this.carSelectionService = carSelectionService;
         this.crateSpawnService = crateSpawnService;
+        this.playerSpawnService = playerSpawnService;
+        this.playerControlService = playerControlService;
         this.adsService = adsService;
 
         SubscribeToLife();
@@ -50,26 +56,28 @@ public class GameFlowService : IGameFlowService, IDisposable
             carSelectionService.CurrentCar.Value.CrateSpawnDelay, 
             carSelectionService.CurrentCar.Value.CrateActivationDelay);
         scoreService.Reset();
+        playerControlService.SetInputEnabled(true);
+        playerSpawnService.SpawnPlayer();
         gameStateService.SetCurrentState(GameState.Playing);
     }
     public void Pause()
     {
         if (gameStateService.CurrentState.Value != GameState.Playing)
             return;
-
+        playerControlService.SetInputEnabled(false);
         gameStateService.SetCurrentState(GameState.Paused);
     }
     public void Resume()
     {
         if (gameStateService.CurrentState.Value != GameState.Paused)
             return;
-
+        playerControlService.SetInputEnabled(true);
         gameStateService.SetCurrentState(GameState.Playing);
     }
     public void OnPlayerDied()
     {
         gameStateService.SetCurrentState(GameState.GameOver);
-
+        playerControlService.SetInputEnabled(false);
         saveService.SaveTopScore(scoreService.TopScore.Value);
     }
     public void TryRevive()
@@ -113,6 +121,7 @@ public class GameFlowService : IGameFlowService, IDisposable
     public void OnReviveSuccess()
     {
         lifeService.Revive();
+        playerControlService.SetInputEnabled(true);
         gameStateService.SetCurrentState(GameState.Playing);
     }
     public void OnReviveFailed()

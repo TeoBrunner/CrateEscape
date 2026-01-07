@@ -498,7 +498,7 @@
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Gamepad",
+                    "groups": ";Keyboard&Mouse",
                     "action": "SteerLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -509,7 +509,7 @@
                     "path": "<Keyboard>/leftArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Gamepad",
+                    "groups": ";Keyboard&Mouse",
                     "action": "SteerLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -520,7 +520,7 @@
                     "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Gamepad",
                     "action": "SteerLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -531,7 +531,7 @@
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Gamepad",
+                    "groups": ";Keyboard&Mouse",
                     "action": "SteerRight",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -542,7 +542,7 @@
                     "path": "<Keyboard>/rightArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Gamepad",
+                    "groups": ";Keyboard&Mouse",
                     "action": "SteerRight",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -553,7 +553,7 @@
                     "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Gamepad",
                     "action": "SteerRight",
                     "isComposite": false,
                     "isPartOfComposite": false
