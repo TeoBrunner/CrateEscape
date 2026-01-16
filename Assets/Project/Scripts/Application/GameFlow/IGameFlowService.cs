@@ -5,8 +5,5 @@ public interface IGameFlowService
     void Pause();
     void Resume();
     void OnPlayerDied();
-    void TryRevive();
-    void OnReviveSuccess();
-    void OnReviveFailed();
     void ExitToMenu();
 }
