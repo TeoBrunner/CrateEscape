@@ -9,10 +9,10 @@ public class MainMenuView : MonoBehaviour
     [SerializeField] private Button playButton;
     [SerializeField] private CanvasGroup canvasGroup;
     private IGameFlowService gameFlowService;
-    private IGameStateService gameStateService;
+    private IGameStateProvider gameStateService;
 
     [Inject]
-    public void Construct(IGameFlowService gameFlowService, IGameStateService gameStateService)
+    public void Construct(IGameFlowService gameFlowService, IGameStateProvider gameStateService)
     {
         this.gameFlowService = gameFlowService;
         this.gameStateService = gameStateService;

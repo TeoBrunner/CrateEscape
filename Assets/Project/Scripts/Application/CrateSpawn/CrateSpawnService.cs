@@ -5,7 +5,7 @@ using Zenject;
 
 public class CrateSpawnService : ICrateSpawnService, IInitializable, IDisposable
 {
-    private readonly IGameStateService gameStateService;
+    private readonly IGameStateProvider gameStateService;
     private readonly CrateView.Pool cratePool;
     private readonly CompositeDisposable disposables = new();
 
@@ -14,7 +14,7 @@ public class CrateSpawnService : ICrateSpawnService, IInitializable, IDisposable
     private Transform playerTransform;
 
     public CrateSpawnService(
-        IGameStateService gameStateService,
+        IGameStateProvider gameStateService,
         CrateView.Pool cratePool)
     {
         this.gameStateService = gameStateService;

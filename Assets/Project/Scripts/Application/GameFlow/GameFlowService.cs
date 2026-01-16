@@ -4,7 +4,8 @@ using UniRx;
 public class GameFlowService : IGameFlowService, IDisposable
 {
     private readonly ISaveService saveService;
-    private readonly IGameStateService gameStateService;
+    private readonly IGameStateProvider gameStateProvider;
+    private readonly IGameStateController gameStateController;
     private readonly ILifeService lifeService;
     private readonly ICurrencyService currencyService;
     private readonly IReviveService reviveService;
@@ -18,7 +19,8 @@ public class GameFlowService : IGameFlowService, IDisposable
     private readonly CompositeDisposable disposables = new();
     public GameFlowService(
         ISaveService saveService,
-        IGameStateService gameStateService, 
+        IGameStateProvider gameStateProvider, 
+        IGameStateController gameStateController, 
         ILifeService lifeService,
         ICurrencyService currencyService,
         IReviveService reviveService,
@@ -30,7 +32,7 @@ public class GameFlowService : IGameFlowService, IDisposable
         IAdsService adsService)
     {
         this.saveService = saveService;
-        this.gameStateService = gameStateService;
+        this.gameStateProvider = gameStateProvider;
         this.lifeService = lifeService;
         this.currencyService = currencyService;
         this.reviveService = reviveService;
@@ -48,7 +50,7 @@ public class GameFlowService : IGameFlowService, IDisposable
     {
         lifeService.CurrentLife
             .Where(lives => lives <=0)
-            .Where(_ => gameStateService.CurrentState.Value == GameState.Playing)
+            .Where(_ => gameStateProvider.CurrentState.Value == GameState.Playing)
             .Subscribe( _ => OnPlayerDied())
             .AddTo(disposables);
     }
@@ -65,12 +67,12 @@ public class GameFlowService : IGameFlowService, IDisposable
     private void HandleReviveSuccess()
     {
         playerControlService.SetInputEnabled(true);
-        gameStateService.SetCurrentState(GameState.Playing);
+        gameStateController.SetCurrentState(GameState.Playing);
     }
 
     private void HandleReviveFailed()
     {
-        gameStateService.SetCurrentState(GameState.GameOver);
+        gameStateController.SetCurrentState(GameState.GameOver);
     }
 
     public void StartGame() 
@@ -82,31 +84,31 @@ public class GameFlowService : IGameFlowService, IDisposable
         scoreService.Reset();
         playerControlService.SetInputEnabled(true);
         playerSpawnService.SpawnPlayer();
-        gameStateService.SetCurrentState(GameState.Playing);
+        gameStateController.SetCurrentState(GameState.Playing);
     }
     public void Pause()
     {
-        if (gameStateService.CurrentState.Value != GameState.Playing)
+        if (gameStateProvider.CurrentState.Value != GameState.Playing)
             return;
         playerControlService.SetInputEnabled(false);
-        gameStateService.SetCurrentState(GameState.Paused);
+        gameStateController.SetCurrentState(GameState.Paused);
     }
     public void Resume()
     {
-        if (gameStateService.CurrentState.Value != GameState.Paused)
+        if (gameStateProvider.CurrentState.Value != GameState.Paused)
             return;
         playerControlService.SetInputEnabled(true);
-        gameStateService.SetCurrentState(GameState.Playing);
+        gameStateController.SetCurrentState(GameState.Playing);
     }
     public void OnPlayerDied()
     {
-        gameStateService.SetCurrentState(GameState.GameOver);
+        gameStateController.SetCurrentState(GameState.GameOver);
         playerControlService.SetInputEnabled(false);
         saveService.SaveTopScore(scoreService.TopScore.Value);
     }
     public void ExitToMenu()
     {
-        gameStateService.SetCurrentState(GameState.MainMenu);
+        gameStateController.SetCurrentState(GameState.MainMenu);
     }
 
     public void Dispose()

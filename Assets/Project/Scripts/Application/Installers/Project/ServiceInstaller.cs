@@ -13,7 +13,8 @@ public class ServiceInstaller : ScriptableObjectInstaller<ServiceInstaller>
 
         Container.Bind<ILevelProvider>().To<LevelProvider>().AsSingle().NonLazy();
 
-        Container.Bind<IGameStateService>().To<GameStateService>().AsSingle().NonLazy();
+        Container.Bind<IGameStateProvider>().To<GameStateService>().AsSingle().NonLazy();
+        Container.Bind<IGameStateController>().To<GameStateService>().AsSingle().NonLazy();
         Container.Bind<ILifeService>().To<LifeService>().AsSingle().NonLazy();
         Container.Bind<ICurrencyService>().To<CurrencyService>().AsSingle().NonLazy();
         Container.Bind<IReviveService>().To<ReviveService>().AsSingle().NonLazy();
