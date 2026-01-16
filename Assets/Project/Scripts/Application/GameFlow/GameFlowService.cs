@@ -7,6 +7,7 @@ public class GameFlowService : IGameFlowService, IDisposable
     private readonly IGameStateService gameStateService;
     private readonly ILifeService lifeService;
     private readonly ICurrencyService currencyService;
+    private readonly IReviveService reviveService;
     private readonly IScoreService scoreService;
     private readonly ICarSelectionService carSelectionService;
     private readonly ICrateSpawnService crateSpawnService;
@@ -20,6 +21,7 @@ public class GameFlowService : IGameFlowService, IDisposable
         IGameStateService gameStateService, 
         ILifeService lifeService,
         ICurrencyService currencyService,
+        IReviveService reviveService,
         IScoreService scoreService,
         ICarSelectionService carSelectionService,
         ICrateSpawnService crateSpawnService,
@@ -31,6 +33,7 @@ public class GameFlowService : IGameFlowService, IDisposable
         this.gameStateService = gameStateService;
         this.lifeService = lifeService;
         this.currencyService = currencyService;
+        this.reviveService = reviveService;
         this.scoreService = scoreService;
         this.carSelectionService = carSelectionService;
         this.crateSpawnService = crateSpawnService;
@@ -39,6 +42,7 @@ public class GameFlowService : IGameFlowService, IDisposable
         this.adsService = adsService;
 
         SubscribeToLife();
+        SubscribeToRevive();
     }
     private void SubscribeToLife()
     {
@@ -47,6 +51,26 @@ public class GameFlowService : IGameFlowService, IDisposable
             .Where(_ => gameStateService.CurrentState.Value == GameState.Playing)
             .Subscribe( _ => OnPlayerDied())
             .AddTo(disposables);
+    }
+    private void SubscribeToRevive()
+    {
+        reviveService.OnReviveSuccess
+            .Subscribe(_ => HandleReviveSuccess())
+            .AddTo(disposables);
+
+        reviveService.OnReviveFailed
+            .Subscribe(_ => HandleReviveFailed())
+            .AddTo(disposables);
+    }
+    private void HandleReviveSuccess()
+    {
+        playerControlService.SetInputEnabled(true);
+        gameStateService.SetCurrentState(GameState.Playing);
+    }
+
+    private void HandleReviveFailed()
+    {
+        gameStateService.SetCurrentState(GameState.GameOver);
     }
 
     public void StartGame() 
@@ -79,57 +103,6 @@ public class GameFlowService : IGameFlowService, IDisposable
         gameStateService.SetCurrentState(GameState.GameOver);
         playerControlService.SetInputEnabled(false);
         saveService.SaveTopScore(scoreService.TopScore.Value);
-    }
-    public void TryRevive()
-    {
-        if (gameStateService.CurrentState.Value != GameState.GameOver)
-            return;
-
-        if (lifeService.Revived.Value == true)
-            return;
-
-        gameStateService.SetCurrentState(GameState.Reviving);
-        OnReviveSuccess();
-    }
-    public void TryReviveWithCurrency(int cost)
-    {
-        if (gameStateService.CurrentState.Value != GameState.GameOver)
-            return;
-
-        if (lifeService.Revived.Value == true)
-            return;
-
-        if (currencyService.TrySpend(cost))
-        {
-            gameStateService.SetCurrentState(GameState.Reviving);
-            OnReviveSuccess();
-        }
-    }
-    public void TryReviveWithAds()
-    {
-        if (gameStateService.CurrentState.Value != GameState.GameOver)
-            return;
-
-        if (lifeService.Revived.Value == true)
-            return;
-
-        if (adsService.IsRewardedAvailable.Value)
-        {
-            adsService.ShowRewarded(OnReviveSuccess, OnReviveFailed);
-        }
-    }
-    public void OnReviveSuccess()
-    {
-        lifeService.Revive();
-        playerControlService.SetInputEnabled(true);
-        gameStateService.SetCurrentState(GameState.Playing);
-    }
-    public void OnReviveFailed()
-    {
-        if (gameStateService.CurrentState.Value != GameState.Reviving)
-            return;
-
-        gameStateService.SetCurrentState(GameState.GameOver);
     }
     public void ExitToMenu()
     {
