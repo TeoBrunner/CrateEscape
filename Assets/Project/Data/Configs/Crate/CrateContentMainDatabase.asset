@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e94e11c9b08804d468fb0dd60347d897, type: 3}
+  m_Name: CrateContentMainDatabase
+  m_EditorClassIdentifier: Assembly-CSharp::CrateContentDatabase
+  contentList:
+  - {fileID: 11400000, guid: 13aa938070a702b469b6797cbbc347f1, type: 2}
+  - {fileID: 11400000, guid: 3f65a45ae7def974b9896bf43c022af3, type: 2}
+  - {fileID: 11400000, guid: a0453bc2c8245b84588c9791cffdbd76, type: 2}

@@ -10,25 +10,43 @@ public class CrateView : MonoBehaviour, IPoolable<IMemoryPool>
     [SerializeField] private Color inactiveColor = new Color(1, 1, 1, 0.5f);
     [SerializeField] private Color activeColor = Color.white;
 
+    private float spawnTweenDuration;
+    private float activationDelay;
+    private float transformationDelay;
+
     private IMemoryPool pool;
-    public void ActivateSequence(float delay)
+    [Inject]
+    private void Construct(CrateConfig config, IMemoryPool pool)
+    {
+        spawnTweenDuration = config.CrateSpawnTweenDuration;
+        activationDelay = config.CrateActivationDelay;
+        transformationDelay = config.CrateTransformationDelay;
+        this.pool = pool;
+    }
+    
+    public void ActivateSequence()
     {
         col.enabled = false;
         rb.isKinematic = true;
         meshRenderer.material.color = inactiveColor;
 
         transform.localScale = Vector3.zero;
-        transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutBack);
+        transform.DOScale(Vector3.one, spawnTweenDuration).SetEase(Ease.OutBack);
 
-        StartCoroutine(BecomeObstacleRoutine(delay));
+        StartCoroutine(BecomeObstacleRoutine());
     }
-    private IEnumerator BecomeObstacleRoutine(float delay)
+    private IEnumerator BecomeObstacleRoutine()
     {
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSeconds(activationDelay);
 
         col.enabled = true;
         rb.isKinematic = false;
         meshRenderer.material.DOColor(activeColor, 0.2f);
+
+        yield return new WaitForSeconds(transformationDelay);
+
+        pool.Despawn(this);
+
     }
     public void OnDespawned()
     {

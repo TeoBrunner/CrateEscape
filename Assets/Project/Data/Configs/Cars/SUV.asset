@@ -18,5 +18,5 @@ MonoBehaviour:
   maxLives: 3
   speed: 1
   turnSpeed: 100
-  crateSpawnDelay: 0.5
+  crateSpawnDelay: 2
   crateActivationDelay: 1

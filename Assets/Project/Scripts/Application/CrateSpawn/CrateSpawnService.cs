@@ -37,10 +37,9 @@ public class CrateSpawnService : ICrateSpawnService, IInitializable, IDisposable
             .Subscribe(_ => StopSpawning())
             .AddTo(disposables);
     }
-    public void RegisterDelays(float crateSpawnDelay, float crateActivationDelay)
+    public void RegisterSpawnDelay(float crateSpawnDelay)
     {
         this.crateSpawnDelay = crateSpawnDelay;
-        this.crateActivationDelay = crateActivationDelay;
 
     }
     public void RegisterPlayer(Transform playerTransform)
@@ -66,7 +65,7 @@ public class CrateSpawnService : ICrateSpawnService, IInitializable, IDisposable
         crate.transform.position = playerTransform.position;
         crate.transform.rotation = playerTransform.rotation;
 
-        crate.ActivateSequence(crateActivationDelay);
+        crate.ActivateSequence();
     }
     public void Dispose()
     {

@@ -87,9 +87,8 @@ public class GameFlowService : IGameFlowService, IDisposable
         playerControlService.SetInputEnabled(true);
         playerSpawnService.SpawnPlayer();
         crateSpawnService.RegisterPlayer(levelProvider.PlayerTransform.Value);
-        crateSpawnService.RegisterDelays(
-            carSelectionService.CurrentCar.Value.CrateSpawnDelay,
-            carSelectionService.CurrentCar.Value.CrateActivationDelay);
+        crateSpawnService.RegisterSpawnDelay(
+            carSelectionService.CurrentCar.Value.CrateSpawnDelay);
         gameStateController.SetCurrentState(GameState.Playing);
         
     }

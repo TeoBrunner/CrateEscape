@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConfigInstaller
   audioDatabase: {fileID: 11400000, guid: 51f2452e1a388b6448ca246dc4793d83, type: 2}
   carDatabase: {fileID: 11400000, guid: cccbd81400de11343802c1d9e4bf622c, type: 2}
+  crateConfig: {fileID: 11400000, guid: 86be959e6d863e541a7f48643b7eef02, type: 2}

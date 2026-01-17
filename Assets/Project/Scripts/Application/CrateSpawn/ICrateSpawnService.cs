@@ -3,6 +3,6 @@ using UnityEngine;
 
 public interface ICrateSpawnService
 {
-    void RegisterDelays(float crateSpawnDelay, float crateActivationDelay);
+    void RegisterSpawnDelay(float crateSpawnDelay);
     void RegisterPlayer(Transform playerTransform);
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "CarConfig", menuName = "Configs/CarConfig")]
+[CreateAssetMenu(fileName = "CarConfig", menuName = "Configs/Car/CarConfig")]
 
 public class CarConfig : ScriptableObject
 {
@@ -11,7 +11,6 @@ public class CarConfig : ScriptableObject
     [SerializeField] private float speed = 1;
     [SerializeField] private float turnSpeed = 1;
     [SerializeField] private float crateSpawnDelay = 0.5f;
-    [SerializeField] private float crateActivationDelay = 1;
 
     public string CarId => carId;
     public string CarName => carName;
@@ -20,5 +19,4 @@ public class CarConfig : ScriptableObject
     public float Speed => speed;
     public float TurnSpeed => turnSpeed;
     public float CrateSpawnDelay => crateSpawnDelay;
-    public float CrateActivationDelay => crateActivationDelay;
 }
