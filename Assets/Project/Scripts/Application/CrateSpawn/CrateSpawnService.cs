@@ -9,6 +9,8 @@ public class CrateSpawnService : ICrateSpawnService, IInitializable, IDisposable
     private readonly CrateView.Pool cratePool;
     private readonly CompositeDisposable disposables = new();
 
+    private IDisposable spawnTimer;
+
     private float crateSpawnDelay;
     private float crateActivationDelay;
     private Transform playerTransform;
@@ -29,14 +31,17 @@ public class CrateSpawnService : ICrateSpawnService, IInitializable, IDisposable
             .Where(state => state == GameState.Playing)
             .Subscribe(_ => StartSpawning())
             .AddTo(disposables);
+
+        gameStateService.CurrentState
+            .Where(state => state != GameState.Playing)
+            .Subscribe(_ => StopSpawning())
+            .AddTo(disposables);
     }
     public void RegisterDelays(float crateSpawnDelay, float crateActivationDelay)
     {
         this.crateSpawnDelay = crateSpawnDelay;
         this.crateActivationDelay = crateActivationDelay;
 
-        Dispose();
-        Initialize();
     }
     public void RegisterPlayer(Transform playerTransform)
     {
@@ -44,10 +49,14 @@ public class CrateSpawnService : ICrateSpawnService, IInitializable, IDisposable
     }
     private void StartSpawning()
     {
-        Observable.Interval(TimeSpan.FromSeconds(crateSpawnDelay))
+        spawnTimer = Observable.Interval(TimeSpan.FromSeconds(crateSpawnDelay))
             .TakeWhile(_ => gameStateService.CurrentState.Value == GameState.Playing)
             .Subscribe(_ => SpawnCrate())
             .AddTo(disposables);
+    }
+    private void StopSpawning()
+    {
+        spawnTimer?.Dispose();
     }
     private void SpawnCrate()
     {

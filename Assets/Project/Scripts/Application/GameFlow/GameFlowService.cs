@@ -16,6 +16,8 @@ public class GameFlowService : IGameFlowService, IDisposable
     private readonly IPlayerControlService playerControlService;
     private readonly IAdsService adsService;
 
+    private readonly ILevelProvider levelProvider;
+
     private readonly CompositeDisposable disposables = new();
     public GameFlowService(
         ISaveService saveService,
@@ -29,10 +31,12 @@ public class GameFlowService : IGameFlowService, IDisposable
         ICrateSpawnService crateSpawnService,
         IPlayerSpawnService playerSpawnService,
         IPlayerControlService playerControlService,
-        IAdsService adsService)
+        IAdsService adsService,
+        ILevelProvider levelProvider)
     {
         this.saveService = saveService;
         this.gameStateProvider = gameStateProvider;
+        this.gameStateController = gameStateController;
         this.lifeService = lifeService;
         this.currencyService = currencyService;
         this.reviveService = reviveService;
@@ -42,6 +46,7 @@ public class GameFlowService : IGameFlowService, IDisposable
         this.playerSpawnService = playerSpawnService;
         this.playerControlService = playerControlService;
         this.adsService = adsService;
+        this.levelProvider = levelProvider;
 
         SubscribeToLife();
         SubscribeToRevive();
@@ -78,13 +83,15 @@ public class GameFlowService : IGameFlowService, IDisposable
     public void StartGame() 
     {
         lifeService.SetMaxLives(carSelectionService.CurrentCar.Value.MaxLives);
-        crateSpawnService.RegisterDelays(
-            carSelectionService.CurrentCar.Value.CrateSpawnDelay, 
-            carSelectionService.CurrentCar.Value.CrateActivationDelay);
         scoreService.Reset();
         playerControlService.SetInputEnabled(true);
         playerSpawnService.SpawnPlayer();
+        crateSpawnService.RegisterPlayer(levelProvider.PlayerTransform.Value);
+        crateSpawnService.RegisterDelays(
+            carSelectionService.CurrentCar.Value.CrateSpawnDelay,
+            carSelectionService.CurrentCar.Value.CrateActivationDelay);
         gameStateController.SetCurrentState(GameState.Playing);
+        
     }
     public void Pause()
     {

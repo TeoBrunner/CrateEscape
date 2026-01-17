@@ -8,31 +8,31 @@ public class ServiceInstaller : ScriptableObjectInstaller<ServiceInstaller>
     [SerializeField] private CrateView crateViewPrefab;
     public override void InstallBindings()
     {
-        Container.Bind<ISaveService>().To<PlayerPrefsSaveService>().AsSingle().NonLazy();
-        Container.Bind<IAdsService>().To<MockAdsService>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<PlayerPrefsSaveService>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<MockAdsService>().AsSingle().NonLazy();
 
-        Container.Bind<ILevelProvider>().To<LevelProvider>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<LevelProvider>().AsSingle().NonLazy();
 
-        Container.Bind<IGameStateProvider>().To<GameStateService>().AsSingle().NonLazy();
-        Container.Bind<IGameStateController>().To<GameStateService>().AsSingle().NonLazy();
-        Container.Bind<ILifeService>().To<LifeService>().AsSingle().NonLazy();
-        Container.Bind<ICurrencyService>().To<CurrencyService>().AsSingle().NonLazy();
-        Container.Bind<IReviveService>().To<ReviveService>().AsSingle().NonLazy();
-        Container.Bind<IScoreService>().To<ScoreService>().AsSingle().NonLazy();
-        Container.Bind<ICarSelectionService>().To<CarSelectionService>().AsSingle().NonLazy();
-        Container.Bind<IPlayerControlService>().To<PlayerControlService>().AsSingle().NonLazy();
-        Container.Bind<IInputService>().To<InputService>().AsSingle().NonLazy();
-        Container.Bind<IPlayerSpawnService>().To<PlayerSpawnService>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<GameStateService>().AsSingle().NonLazy();
+
+        Container.BindInterfacesAndSelfTo<LifeService>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<CurrencyService>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<ReviveService>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<ScoreService>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<CarSelectionService>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<PlayerControlService>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<InputService>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<PlayerSpawnService>().AsSingle().NonLazy();
 
         Container.BindMemoryPool<CrateView, CrateView.Pool>()
              .WithInitialSize(20)
              .FromComponentInNewPrefab(crateViewPrefab)
              .UnderTransformGroup("CratesPool");
-        Container.Bind<ICrateSpawnService>().To<CrateSpawnService>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<CrateSpawnService>().AsSingle().NonLazy();
 
         Container.Bind<AudioView>().FromComponentInNewPrefab(audioViewPrefab).AsSingle().NonLazy();
-        Container.Bind<IAudioService>().To<AudioService>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<AudioService>().AsSingle().NonLazy();
 
-        Container.Bind<IGameFlowService>().To<GameFlowService>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<GameFlowService>().AsSingle().NonLazy();
     }
 }

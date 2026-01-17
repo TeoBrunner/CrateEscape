@@ -9,18 +9,18 @@ public class MainMenuView : MonoBehaviour
     [SerializeField] private Button playButton;
     [SerializeField] private CanvasGroup canvasGroup;
     private IGameFlowService gameFlowService;
-    private IGameStateProvider gameStateService;
+    private IGameStateProvider gameStateProvider;
 
     [Inject]
-    public void Construct(IGameFlowService gameFlowService, IGameStateProvider gameStateService)
+    public void Construct(IGameFlowService gameFlowService, IGameStateProvider gameStateProvider)
     {
         this.gameFlowService = gameFlowService;
-        this.gameStateService = gameStateService;
+        this.gameStateProvider = gameStateProvider;
     }
     private void Start()
     {
         playButton.OnClickAsObservable().Subscribe(_=>gameFlowService.StartGame()).AddTo(this);
-        gameStateService.CurrentState.Subscribe(OnStateChanged).AddTo(this);
+        gameStateProvider.CurrentState.Subscribe(OnStateChanged).AddTo(this);
     }
     private void OnStateChanged(GameState state)
     {

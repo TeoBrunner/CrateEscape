@@ -39,6 +39,7 @@ public class PlayerSpawnService : IPlayerSpawnService
         controller.Initialize(config.Speed, config.TurnSpeed);
 
         createdPlayer.Value = controller;
+        levelProvider.SetPlayerTransform(carObj.transform);
     }
 
     public void DespawnCurrent()
