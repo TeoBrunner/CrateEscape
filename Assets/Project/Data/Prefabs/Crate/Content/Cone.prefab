@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2971777288524398919}
   - component: {fileID: 380925976676058518}
   - component: {fileID: 6378857656449311081}
+  - component: {fileID: -1224581391696011640}
   m_Layer: 0
   m_Name: Cone
   m_TagString: Untagged
@@ -82,6 +83,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-1224581391696011640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8620456890203162855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66963e7af1479814f833e421213809bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Cone
 --- !u!1001 &4986393867863814511
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -7,7 +7,7 @@ using UnityEngine;
 public class CrateContentDatabase : ScriptableObject
 {
     [SerializeField] private List<CompositeCrateContent> contentList = new();
-    public GameObject GetItem()
+    public GameObject GetPrefab()
     {
         if (contentList.Count == 0)
         {

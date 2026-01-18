@@ -29,6 +29,8 @@ public class ServiceInstaller : ScriptableObjectInstaller<ServiceInstaller>
              .FromComponentInNewPrefab(crateViewPrefab)
              .UnderTransformGroup("CratesPool");
         Container.BindInterfacesAndSelfTo<CrateSpawnService>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<ItemFactory>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<ItemSpawnService>().AsSingle().NonLazy();
 
         Container.Bind<AudioView>().FromComponentInNewPrefab(audioViewPrefab).AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<AudioService>().AsSingle().NonLazy();

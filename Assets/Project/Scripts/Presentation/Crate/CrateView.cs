@@ -14,13 +14,18 @@ public class CrateView : MonoBehaviour, IPoolable<IMemoryPool>
     private float activationDelay;
     private float transformationDelay;
 
+    private IItemSpawnService itemSpawnService;
     private IMemoryPool pool;
     [Inject]
-    private void Construct(CrateConfig config, IMemoryPool pool)
+    private void Construct(
+        CrateConfig config,
+        IItemSpawnService itemSpawnService,
+        IMemoryPool pool)
     {
         spawnTweenDuration = config.CrateSpawnTweenDuration;
         activationDelay = config.CrateActivationDelay;
         transformationDelay = config.CrateTransformationDelay;
+        this.itemSpawnService = itemSpawnService;
         this.pool = pool;
     }
     
@@ -45,6 +50,7 @@ public class CrateView : MonoBehaviour, IPoolable<IMemoryPool>
 
         yield return new WaitForSeconds(transformationDelay);
 
+        itemSpawnService.SpawnItem(transform.position);
         pool.Despawn(this);
 
     }
