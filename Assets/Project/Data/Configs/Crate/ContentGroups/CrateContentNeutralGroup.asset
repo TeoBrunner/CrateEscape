@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8a5b4982097716488c8d9924f2ef661, type: 3}
   m_Name: CrateContentNeutralGroup
   m_EditorClassIdentifier: Assembly-CSharp::CrateContentMultiple
-  chance: 2
-  contentList: []
+  chance: 1
+  contentList:
+  - {fileID: 11400000, guid: 0bea52433d146ed4582b01a7654ca483, type: 2}

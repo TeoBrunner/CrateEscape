@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: BananaPeel
   m_EditorClassIdentifier: Assembly-CSharp::CrateContentSingle
   chance: 1
-  item: {fileID: 0}
+  item: {fileID: 7339331589786775791, guid: abe106766c8783244bee4a0c85d22412, type: 3}

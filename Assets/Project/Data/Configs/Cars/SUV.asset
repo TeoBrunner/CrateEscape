@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1794b7dd1fe50d4c9e999c4d074eef5, type: 3}
+  m_Script: {fileID: 11500000, guid: 358e62baaa33ad34f83251573ace924f, type: 3}
   m_Name: SUV
   m_EditorClassIdentifier: Assembly-CSharp::CarConfig
   carId: SUV
@@ -17,6 +17,5 @@ MonoBehaviour:
   carPrefab: {fileID: 8272298487813027769, guid: 50f57020df279b24a8539327e6adc142, type: 3}
   maxLives: 3
   speed: 1
-  turnSpeed: 100
-  crateSpawnDelay: 2
-  crateActivationDelay: 1
+  turnSpeed: 1
+  crateSpawnDelay: 1

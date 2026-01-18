@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Cone
   m_EditorClassIdentifier: Assembly-CSharp::CrateContentSingle
   chance: 1
-  item: {fileID: 0}
+  item: {fileID: 8620456890203162855, guid: 591352f30c2a14949bebcabb6a5b0d9d, type: 3}

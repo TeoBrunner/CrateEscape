@@ -4,8 +4,7 @@ using Zenject;
 public abstract class PoolableItem : MonoBehaviour, IPoolable
 {
     protected IMemoryPool pool;
-    [Inject]
-    private void Construct (IMemoryPool pool)
+    public void SetPool (IMemoryPool pool)
     {
         this.pool = pool;
     }
@@ -16,6 +15,17 @@ public abstract class PoolableItem : MonoBehaviour, IPoolable
 
     public void OnDespawned()
     {
-        pool?.Despawn(this);
+
+    }
+    public void ReturnToPool()
+    {
+        if (pool != null)
+        {
+            pool.Despawn(this);
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

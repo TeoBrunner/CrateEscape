@@ -50,7 +50,7 @@ public class CarController : MonoBehaviour
 
         if (turnInput != 0)
         {
-            Quaternion deltaRotation = Quaternion.Euler(0, turnInput * turnSpeed * Time.fixedDeltaTime, 0);
+            Quaternion deltaRotation = Quaternion.Euler(0, turnInput * 100 * turnSpeed * Time.fixedDeltaTime, 0);
             rb.MoveRotation(rb.rotation * deltaRotation);
         }
     }

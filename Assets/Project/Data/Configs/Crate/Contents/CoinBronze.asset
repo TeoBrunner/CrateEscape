@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: CoinBronze
   m_EditorClassIdentifier: Assembly-CSharp::CrateContentSingle
   chance: 1
-  item: {fileID: 0}
+  item: {fileID: 3152030025441428264, guid: 08a6bb8a608100d448a70f9e77548d36, type: 3}

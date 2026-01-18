@@ -67,6 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95e75303ea688ba439ca8b6e883ea8ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Coin
+  rewardAmount: 3
 --- !u!1001 &5194270299688939067
 PrefabInstance:
   m_ObjectHideFlags: 0

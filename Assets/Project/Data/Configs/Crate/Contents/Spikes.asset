@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: add54e5c23bf3bd40aaa8d32d8286b60, type: 3}
-  m_Name: CarDatabase
-  m_EditorClassIdentifier: Assembly-CSharp::CarDatabase
-  carConfigs:
-  - {fileID: 11400000, guid: cc29170f6d5697247b8037b799bcb601, type: 2}
+  m_Script: {fileID: 11500000, guid: 89f36fc68972e564e963daceaa516ac8, type: 3}
+  m_Name: Spikes
+  m_EditorClassIdentifier: Assembly-CSharp::CrateContentSingle
+  chance: 0.3
+  item: {fileID: 5541386756691680352, guid: fe5adb7aaa01ed84ea9a50e030a7c39e, type: 3}

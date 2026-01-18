@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89f36fc68972e564e963daceaa516ac8, type: 3}
   m_Name: CoinGold
   m_EditorClassIdentifier: Assembly-CSharp::CrateContentSingle
-  chance: 1
-  item: {fileID: 0}
+  chance: 0.1
+  item: {fileID: 3152030025441428264, guid: 6966bb9726f22c9499d025e23681892c, type: 3}
